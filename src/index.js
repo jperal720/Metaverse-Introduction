@@ -1,9 +1,5 @@
 'use strict';
 
-const hello = 'hello World';
-
-console.log('hello:', hello);
-
 //*Declaration of a new scene with Three.js
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x00222f); //!All colors need to start with 0x
@@ -19,4 +15,50 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-renderer.render(scene, camera);
+//*Creating a simple plane
+const planeGeometry = new THREE.BoxGeometry(100, 0.2, 50);
+const planeMaterial = new THREE.MeshPhongMaterial({ color: 0x0fffba });
+const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+
+scene.add(plane);
+
+//*Creating simple geometry: Cube
+const cubeGeometry = new THREE.BoxGeometry();
+const cubeMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000 });
+const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+cube.position.y = 1;
+
+scene.add(cube);
+
+//*Creating simple geometry: Cone
+
+const coneGeometry = new THREE.ConeGeometry();
+const coneMaterial = new THREE.MeshPhongMaterial({ color: 0xffff00 });
+const cone = new THREE.Mesh(coneGeometry, coneMaterial);
+
+cone.position.x = 10;
+cone.position.y = 1;
+
+scene.add(cone);
+
+camera.position.set(10, 5, 40);
+
+//*Creating lighting
+const ambientLighting = new THREE.AmbientLight(0xbda355);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+ambientLighting.add(directionalLight);
+scene.add(ambientLighting);
+
+const animate = function () {
+  ambientLighting.rotation.z += 0.01;
+  cube.rotation.y += 0.01;
+  cube.rotation.z -= 0.01;
+  cone.rotation.y -= 0.01;
+  cone.rotation.z += 0.01;
+  requestAnimationFrame(animate);
+  renderer.render(scene, camera);
+};
+
+animate();
+
+// renderer.render(scene, camera);
