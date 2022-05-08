@@ -1,5 +1,9 @@
 'use strict';
 
+import movements from './movements.js';
+
+const cameraMovementSpeed = 1.5;
+
 //*Declaration of a new scene with Three.js
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x00222f); //!All colors need to start with 0x
@@ -57,6 +61,18 @@ const animate = function () {
   cone.rotation.z += 0.01;
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
+
+  //*Camera Movements
+  //Movement to the left
+  if (movements.isPressed(37)) camera.position.x -= cameraMovementSpeed;
+  //Upward movement
+  if (movements.isPressed(38)) camera.position.y += cameraMovementSpeed;
+  //Movement to the left
+  if (movements.isPressed(39)) camera.position.x += cameraMovementSpeed;
+  //Downward movement
+  if (movements.isPressed(40)) camera.position.y -= cameraMovementSpeed;
+
+  camera.lookAt(plane.position);
 };
 
 animate();
