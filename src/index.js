@@ -64,13 +64,13 @@ const animate = function () {
 
   //*Camera Movements
   //Movement to the left
-  if (movements.isPressed(37)) camera.position.x -= cameraMovementSpeed;
+  if (movements.isPressed(65)) camera.position.x -= cameraMovementSpeed;
   //Upward movement
-  if (movements.isPressed(38)) camera.position.y += cameraMovementSpeed;
+  if (movements.isPressed(87)) camera.position.y += cameraMovementSpeed;
   //Movement to the left
-  if (movements.isPressed(39)) camera.position.x += cameraMovementSpeed;
+  if (movements.isPressed(68)) camera.position.x += cameraMovementSpeed;
   //Downward movement
-  if (movements.isPressed(40)) camera.position.y -= cameraMovementSpeed;
+  if (movements.isPressed(83)) camera.position.y -= cameraMovementSpeed;
 
   camera.lookAt(plane.position);
 };
